@@ -3,7 +3,7 @@
 use Dotenv\Util\Regex;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\ListaUmController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,19 +34,10 @@ Route::post('/exer1resp', function(Request $request){
     return view('exer1', compact('soma'));
 });
 
-Route::get('ex1', function() {
-    return view('lista-exercicios.ex1');
-});
+Route::get('ex1', [ListaUmController::class, 'abrirFormExer1' ]);
 
 
-Route::post('listaex1', function(Request $request) {
-    $nota1 = floatval($request->input('nota1'));
-    $nota2 = floatval($request->input('nota2'));
-    $nota3 = floatval($request->input('nota3'));
-
-    $media = ($nota1 + $nota2 + $nota3) / 3;
-    return view('lista-exercicios.ex1', compact('media'));
-});
+Route::post('listaex1', [ListaUmController::class, 'respostaExer1' ] );
 
 
 Route::get('/ex2', function() {
@@ -115,3 +106,112 @@ Route::post('listaex7', function(Request $request) {
     return view('lista-exercicios.ex7', compact('perimetro'));
 });
 
+Route::get("ex8", function() {
+    return view('lista-exercicios.ex8');
+});
+
+Route::post('listaex8', function(Request $request) {
+    $base = intval($request->input('base'));
+    $expoente = intval($request->input('expoente'));
+
+    $resultado = $base ** $expoente;
+    return view('lista-exercicios.ex8', compact('resultado'));
+});
+
+
+Route::get("ex9", function() {
+    return view('lista-exercicios.ex9');
+});
+
+Route::post("listaex9", function(Request $request) {
+    $metros = floatval($request->input('metros'));
+    $centimetros = $metros * 100;
+
+    return view('lista-exercicios.ex9', compact('centimetros'));
+});
+
+
+Route::get("ex10", function() {
+    return view('lista-exercicios.ex10');
+});
+
+Route::post("listaex10", function(Request $request) {
+    $km = floatval($request->input('km'));
+
+    $milhas = round($km * 0.621371, 2);
+
+    return view("lista-exercicios.ex10", compact("milhas"));
+});
+
+
+Route::get("ex11", function() {
+    return view("lista-exercicios.ex11");
+});
+
+Route::post("listaex11", function(Request $request) {
+    $peso = floatval($request->input("peso"));
+    $altura = floatval($request->input("altura"));
+
+    
+
+    $imc = number_format($peso / ($altura ** 2), 2);
+    return view("lista-exercicios.ex11", compact("imc"));
+});
+
+Route::get("ex12", function() {
+    return view("lista-exercicios.ex12");
+});
+
+Route::post("listaex12", function(Request $request) {
+    $preco = floatval($request->input('preco'));
+    $desconto = floatval($request->input('percentual'));
+
+    $preco_final = number_format($preco * ($desconto /100), 2, ',', '');
+    return view("lista-exercicios.ex12", compact("preco_final"));
+});
+
+Route::get("ex13", function() {
+    return view("lista-exercicios.ex13");
+});
+
+Route::post("listaex13", function(Request $request) {
+    $capital = floatval($request->input("capital"));
+    $taxa = floatval($request->input("taxa"));
+    $periodo = intval($request->input("periodo"));
+
+    $resultado = $capital * ($taxa)  * $periodo;
+    $resultado = number_format($resultado, 2, ',', '');
+    return view("lista-exercicios.ex13", compact("resultado"));
+});
+
+Route::get("ex14", function() {
+    return view("lista-exercicios.ex14");
+});
+
+Route::post('listaex14', function(Request $request) {
+    $capital = floatval($request->input("capital"));
+    $taxa = floatval($request->input("taxa"));
+    $periodo = intval($request->input("periodo"));
+
+    $resultado =  ($capital * (1 + $taxa) ^ $periodo);
+    $resultado = number_format($resultado, 2, ',', '');
+    return view("lista-exercicios.ex14", compact("resultado"));
+});
+
+
+Route::get('ex15', function() {
+    return view("lista-exercicios.ex15");
+});
+
+Route::get("ex15", function() {
+    return view("lista-exercicios.ex15");
+});
+
+Route::post("listaex15", function(Request $request) {
+    $dias = intval($request->input("dias"));
+
+    $horas = $dias * 24;
+    $minutos = $horas * 60;
+    $segundos = $minutos * 60;
+    return view("lista-exercicios.ex15", compact("horas", "minutos", "segundos"));
+});
