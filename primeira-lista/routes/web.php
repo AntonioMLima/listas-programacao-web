@@ -15,9 +15,7 @@ use App\Http\Controllers\ListaUmController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::get('/bem-vindo', function () {
     return "Seja bem vindo!";

@@ -6,13 +6,13 @@ function getPaginationLink($exerciseNumber) {
 $url = $_SERVER['REQUEST_URI'];
 $totalExercicios = 10;
 if (strlen($url) > 5) {
-    $exercicioAtual = intval(substr($url, 8));
+    $exercicioAtual = intval(substr($url, 9));
 
 } else {
     $exercicioAtual = intval(substr($url, 3));
 }
 
-
+echo $exercicioAtual;
 
 
 ?>
